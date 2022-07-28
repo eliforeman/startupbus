@@ -1,0 +1,23 @@
+{
+  "name": "startupbus",
+  "version": "1.0.0",
+  "description": "Startup Bus 2022",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliforeman/startupbus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eliforeman/startupbus/issues"
+  },
+  "homepage": "https://github.com/eliforeman/startupbus#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
