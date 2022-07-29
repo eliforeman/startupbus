@@ -2,38 +2,29 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const { getUserProfileData, getWeeklyGoals, getBodyGoals, getDailyGoals } = require('./server/fitbit');
-
+const { updateFitBitValue } = require('./server/fitbit');
+const axios = require('axios');
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
 
-// welcome page 
-app.get('/', (req, res) => {
-    res.render('index', { title: '21 Days', message: 'An interactive gaming experience with micro transactions paid for in sweat.' })
-  });
+const access_token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMzhKTlEiLCJzdWIiOiJCNEtWN0siLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJ3aHIgd251dCB3cHJvIHdzbGUgd3NvYyB3YWN0IHdveHkgd3RlbSB3d2VpIHdzZXQgd3JlcyB3bG9jIiwiZXhwIjoxNjYxNjE3NjM3LCJpYXQiOjE2NTkwMjU2Mzd9.b8PepMhrMTL4SIe7ANayzi-1VsqP968J04bcAm31Tlc"
+axios.defaults.headers.common['Authorization'] = "Bearer " + access_token;
 
-// user profile
-app.get('/userprofile', async function (req,res,next) {
-    const userProfile = await getUserProfileData;
-    res.send(userProfile)
+const api_data = {
+  "fitbit_completion" : true 
+}
+
+// welcome page / landing page 
+app.get('/', (req, res) => {
+  res.render('index', { title: '21 Days', message: 'An interactive gaming experience with micro transactions paid for in sweat.' })
 });
 
-app.get('/weeklygoals', async function(req,res,next) {
-  const weeklyGoals = await getWeeklyGoals;
-  console.log(weeklyGoals);
-})
-
-app.get('/dailygoals', async function(req,res,next){
-  const dailyGoals = await getDailyGoals;
-  console.log(dailyGoals);
-})
-
-app.get('/bodygoals', async function(req,res,next){
-  const bodyGoals = await getBodyGoals;
-  console.log(bodyGoals);
-})
+// endpoint for the game to get fitness data 
+app.get('/api', (req, res) => {
+  res.send(api_data) 
+});
 
 // start the server listening for requests
 app.listen(process.env.PORT || 3000, 
