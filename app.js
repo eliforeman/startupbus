@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const { updateFitBitValue } = require('./server/fitbit');
+const { updateFitBitValue } = require('./api/fitbit');
 const axios = require('axios');
 
 app.set("views", path.join(__dirname, "views"));
@@ -13,11 +13,12 @@ const access_token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMzhKTlEiLCJzdWIiOiJCNEtWN
 axios.defaults.headers.common['Authorization'] = "Bearer " + access_token;
 
 const api_data = {
-  "fitbit_completion" : true 
+  "fitbit_completion" : true,
+  "fitbit_steps": 22.3
 }
 
 // welcome page / landing page 
-app.get('/', (req, res) => {
+app.get('/user', (req, res) => {
   res.render('index', { title: '21 Days', message: 'An interactive gaming experience with micro transactions paid for in sweat.' })
 });
 
