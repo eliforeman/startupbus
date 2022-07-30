@@ -2,9 +2,11 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const cors = require("cors");
 const { updateFitBitValue } = require('./api/fitbit');
 const axios = require('axios');
 
+app.use(cors());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
