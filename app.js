@@ -22,9 +22,7 @@ const api_data = {
 setInterval(async () => {
   const updatedValue = await getFitBitUpdate
   const updatedValueInt = parseInt(updatedValue)
-  if( updatedValueInt != api_data[fitbit_steps]){
-    api_data["fitbit_steps"] += updatedValueInt 
-  }
+  api_data["fitbit_steps"] = updatedValueInt 
   console.log(api_data);
 },60000); 
 
