@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
-const { updateFitBitValue } = require('./api/fitbit');
+const { getFitBitUpdate } = require('./api/fitbit');
 const axios = require('axios');
 
 app.use(cors());
@@ -16,11 +16,20 @@ axios.defaults.headers.common['Authorization'] = "Bearer " + access_token;
 
 const api_data = {
   "fitbit_completion" : true,
-  "fitbit_steps": 22.3
+  "fitbit_steps": 20
 }
 
+setInterval(async () => {
+  const updatedValue = await getFitBitUpdate
+  const updatedValueInt = parseInt(updatedValue)
+  if( updatedValueInt != api_data[fitbit_steps]){
+    api_data["fitbit_steps"] += updatedValueInt 
+  }
+  console.log(api_data);
+},60000); 
+
 // welcome page / landing page 
-app.get('/user', (req, res) => {
+app.get('/', (req, res) => {
   res.render('index', { title: '21 Days', message: 'An interactive gaming experience with micro transactions paid for in sweat.' })
 });
 
