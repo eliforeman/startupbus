@@ -4,7 +4,7 @@ const access_token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMzhKTlEiLCJzdWIiOiJCNEtWN
 axios.defaults.headers.common['Authorization'] = "Bearer " + access_token;
 
 const getFitBitUpdate = axios.get('https://api.fitbit.com/1/user/-/activities/steps/date/today/1d/15min.json').then((res) => {
-  const update = res.data["activities-steps-intraday"].dataset.shift();
+  let update = res.data["activities-steps-intraday"].dataset.pop();
   return update.value;
 })
 .catch((error) => {
