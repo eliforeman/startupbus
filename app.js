@@ -23,7 +23,6 @@ setInterval(async () => {
   const updatedValue = await getFitBitUpdate
   const updatedValueInt = parseInt(updatedValue)
   api_data["fitbit_steps"] = updatedValueInt 
-  console.log(api_data);
 },60000); 
 
 // welcome page / landing page 
